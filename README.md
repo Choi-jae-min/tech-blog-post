@@ -42,14 +42,14 @@ SEO 최적화해서 써줘
 **Claude Code (git clone)**
 
 ```bash
-git clone https://github.com/<사용자명>/tech-blog-post.git \
+git clone https://github.com/Choi-jae-min/-tech-blog-post.git \
   ~/.claude/skills/tech-blog-post
 ```
 
 **Claude Code (플러그인 마켓플레이스)**
 
 ```
-/plugin marketplace add <사용자명>/tech-blog-post
+/plugin marketplace add Choi-jae-min/-tech-blog-post
 /plugin install tech-blog-post@tech-blog-post-marketplace
 ```
 
