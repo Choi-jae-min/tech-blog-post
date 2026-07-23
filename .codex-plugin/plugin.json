@@ -1,0 +1,18 @@
+{
+  "name": "tech-blog-post",
+  "version": "1.6.0",
+  "description": "특정 기술 주제(한 세션에서 다룬 것이든 여러 날에 걸친 것이든)를 SEO 최적화된 블로그 글 초안으로 정리하는 스킬",
+  "author": {
+    "name": "Choi Jae-min"
+  },
+  "license": "MIT",
+  "keywords": ["blog", "seo", "writing", "tech-blog", "til", "블로그", "글쓰기"],
+  "interface": {
+    "displayName": "tech-blog-post",
+    "shortDescription": "SEO 최적화 기술 블로그 글 초안 작성",
+    "longDescription": "작업 중 쌓인 기술적 경험(대화, git 커밋, 문서)을 모아 검색엔진에 잘 걸리는 블로그 글 초안을 만든다. 트러블슈팅형·개념정리형·비교분석형·튜토리얼형 중 알맞은 구조를 골라 제목·태그·메타 설명까지 SEO를 고려해 작성하고, 기본적으로 posts/{slug}.html(인라인 스타일 HTML)로 저장한다.",
+    "developerName": "Choi Jae-min",
+    "category": "Productivity",
+    "capabilities": ["Bash", "Read", "Write"]
+  }
+}
