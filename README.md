@@ -59,6 +59,18 @@ SEO 최적화해서 써줘
 
 ## 설치
 
+Claude Code · Codex · Cursor · Gemini CLI · Grok Build를 지원합니다. 한 번에 설치하려면:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Choi-jae-min/-tech-blog-post/main/install.sh | bash
+```
+
+호스트별 CLI(`claude`/`codex`/`gemini`)가 감지되면 그 CLI로 설치하고, Grok Build는
+`~/.grok/skills/tech-blog-post`에 clone합니다. Cursor는 프로젝트 단위로만 스킬을 읽어서
+전역 설치가 안 되므로 스크립트가 안내만 하고 넘어갑니다 — 아래 Cursor 절 참조.
+
+수동으로 설치하려면 호스트별로:
+
 **Claude Code (git clone)**
 
 ```bash
@@ -74,21 +86,78 @@ git clone https://github.com/Choi-jae-min/-tech-blog-post.git \
 ```
 
 이 방식으로 설치하면 문장을 다듬어주는 `elements-of-style`(`writing-clearly-and-concisely`
-스킬)이 의존성으로 자동 설치됩니다 — 따로 설치할 필요가 없습니다.
+스킬)이 의존성으로 자동 설치됩니다 — 따로 설치할 필요가 없습니다. Codex·Cursor·Gemini
+CLI·Grok Build에는 이 의존성 자동 설치가 없으므로, 그 스킬이 없으면 문장 다듬기 단계를
+조용히 건너뛰고 나머지 단계만으로 글을 완결합니다.
+
+**Codex**
+
+```
+codex plugin marketplace add Choi-jae-min/-tech-blog-post
+codex plugin add tech-blog-post
+```
+
+**Gemini CLI**
+
+```bash
+gemini extensions install https://github.com/Choi-jae-min/-tech-blog-post
+```
+
+**Grok Build**
+
+```bash
+git clone https://github.com/Choi-jae-min/-tech-blog-post.git ~/.grok/skills/tech-blog-post
+```
+
+**Cursor** (프로젝트 단위 전용 — 전역 설치 불가)
+
+```bash
+git clone https://github.com/Choi-jae-min/-tech-blog-post.git .cursor/skills/tech-blog-post
+```
+
+이 스킬을 쓰려는 각 프로젝트 안에서 실행합니다. `.claude/skills/`, `.codex/skills/`,
+`.agents/skills/` 아래도 Cursor가 같이 읽으므로, 다른 호스트용으로 이미 그 경로에
+설치돼 있다면 따로 안 해도 됩니다.
 
 **Claude.ai / 데스크톱 앱**
 
 설정 → Capabilities → Skills에서 이 폴더를 업로드합니다.
+
+## 여러 호스트 지원 구조
+
+`SKILL.md`가 유일한 권위적 문서입니다. 호스트마다 스킬을 찾는 경로가 달라서, 저장소
+루트의 `SKILL.md`를 가리키는 심볼릭 링크를 각 경로에 둡니다 — 내용은 하나뿐이고
+링크만 여러 개입니다.
+
+| 경로 | 대상 |
+|---|---|
+| `SKILL.md` | 실제 파일 (권위 원본) |
+| `.claude/skills/tech-blog-post/SKILL.md` | → `SKILL.md` (Cursor가 이 경로도 같이 읽음) |
+| `.codex/skills/tech-blog-post/SKILL.md` | → `SKILL.md` |
+| `.cursor/skills/tech-blog-post/SKILL.md` | → `SKILL.md` |
+| `.grok/skills/tech-blog-post/SKILL.md` | → `SKILL.md` |
+
+`AGENTS.md`는 Codex·Cursor·Gemini CLI·Grok Build가 세션 시작 시 읽는 공유 컨텍스트
+파일로, 위 경로 안내와 호스트별로 없을 수 있는 의존 스킬(`elements-of-style`,
+`runway-api`) 처리 방침만 담습니다 — 워크플로 자체는 여전히 `SKILL.md`가 권위 문서입니다.
+Gemini CLI는 `gemini-extension.json`의 `contextFileName`으로 이 파일을 로드합니다.
+
+심볼릭 링크라 Windows에서 이 저장소를 그대로 체크아웃하면(개발자 모드나 관리자 권한 없이는)
+링크가 대상 경로가 적힌 일반 텍스트 파일로 받아들여집니다 — 로컬에서 실제로 폴더처럼
+동작하게 하려면 Windows 설정에서 개발자 모드를 켜고 다시 체크아웃해야 합니다. macOS·Linux나
+개발자 모드가 켜진 Windows에서 clone하면 정상적인 심볼릭 링크로 받아집니다.
 
 ## 함께 쓰는 스킬/플러그인
 
 | 플러그인 | 역할 | 필요 조건 |
 |---|---|---|
 | [`elements-of-style`](https://github.com/obra/elements-of-style) | 5단계 조립 전에 문장을 다듬음 (Strunk의 *The Elements of Style* 원칙) | 없음 — tech-blog-post 설치 시 자동으로 같이 설치됨 |
-| `runway-api` | 4-1단계에서 본문 핵심 개념을 표현하는 이미지를 생성 | 선택 사항. 별도 설치(`/plugin install runway-api@claude-plugins-official`) + 각자 자기 [Runway API 키](https://dev.runwayml.com/settings/api-keys)를 환경변수 `RUNWAYML_API_SECRET`로 설정. 키가 없으면 이미지 없이 진행됨 |
+| `runway-api` | 4-1단계에서 본문 핵심 개념을 표현하는 이미지를 생성 | 선택 사항. 별도 설치(`/plugin install runway-api@claude-plugins-official`) + 각자 자기 [Runway API 키](https://dev.runwayml.com/settings/api-keys)를 환경변수 `RUNWAYML_API_SECRET`로 설정 |
 
-`runway-api`는 유료 API라 강제 의존성으로 넣지 않았습니다 — 설치와 결제는 각자의 몫이고,
-안 깔려 있거나 키가 없으면 스킬은 이미지 단계를 조용히 건너뜁니다.
+`runway-api`는 유료 API라 강제 의존성으로 넣지 않았습니다 — 설치와 결제는 각자의 몫입니다.
+플러그인 자체가 안 깔려 있으면 조용히 이미지 단계를 건너뛰지만, **설치는 돼 있는데 API 키만
+없으면** 이번 글에 이미지를 넣을지 물어봅니다 — 설치했다는 것 자체가 이 기능을 쓰고 싶다는
+신호라서, 키 설정을 깜빡했을 가능성을 짚어주는 쪽이 낫다고 판단했습니다.
 
 ## 커스터마이징
 
