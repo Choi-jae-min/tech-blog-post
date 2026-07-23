@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "tech-blog-post-marketplace",
+  "owner": {
+    "name": "Choi Jae-min"
+  },
+  "description": "작업 중 쌓인 기술적 경험을 SEO 최적화된 블로그 글 초안으로 만들어주는 Claude Code 스킬",
+  "plugins": [
+    {
+      "name": "tech-blog-post",
+      "source": "./",
+      "description": "특정 기술 주제(한 세션에서 다룬 것이든 여러 날에 걸친 것이든)를 SEO 최적화된 블로그 글 초안으로 정리하는 스킬",
+      "version": "1.0.0",
+      "author": {
+        "name": "Choi Jae-min"
+      },
+      "license": "MIT",
+      "keywords": ["blog", "seo", "writing", "tech-blog", "til", "블로그", "글쓰기"],
+      "category": "productivity"
+    }
+  ]
+}
