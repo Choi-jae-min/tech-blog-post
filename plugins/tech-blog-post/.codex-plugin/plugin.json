@@ -1,7 +1,7 @@
 {
   "name": "tech-blog-post",
-  "version": "1.7.0",
-  "description": "특정 기술 주제(한 세션에서 다룬 것이든 여러 날에 걸친 것이든)를 SEO 최적화된 블로그 글 초안으로 정리하는 스킬",
+  "version": "1.8.0",
+  "description": "작업·대화 내용을 읽을 수 있는 글로 정리하는 스킬. 블로그·포스팅 요청이면 SEO 최적화된 글로, 그냥 정리 요청이면 파일 저장 여부(HTML 기본/마크다운/저장 안 함)를 물어본 뒤 만든다",
   "author": {
     "name": "Choi Jae-min"
   },
@@ -10,8 +10,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "tech-blog-post",
-    "shortDescription": "SEO 최적화 기술 블로그 글 초안 작성",
-    "longDescription": "작업 중 쌓인 기술적 경험(대화, git 커밋, 문서)을 모아 검색엔진에 잘 걸리는 블로그 글 초안을 만든다. 트러블슈팅형·개념정리형·비교분석형·튜토리얼형 중 알맞은 구조를 골라 제목·태그·메타 설명까지 SEO를 고려해 작성하고, 기본적으로 posts/{slug}.html(인라인 스타일 HTML)로 저장한다.",
+    "shortDescription": "작업·대화 내용을 글로 정리 (블로그/HTML/MD)",
+    "longDescription": "작업 중 쌓인 기술적 경험(대화, git 커밋, 문서)을 읽을 수 있는 글로 정리한다. 명시적 블로그·포스팅 요청이면 트러블슈팅형·개념정리형·비교분석형·튜토리얼형 중 알맞은 구조로 제목·태그·메타 설명까지 SEO를 고려해 작성하고 posts/{slug}.html로 저장한다. 그냥 '정리해줘'류 요청이면 파일 저장 여부(HTML 기본/마크다운/저장 안 함)를 먼저 물어본 뒤 진행한다.",
     "developerName": "Choi Jae-min",
     "category": "Productivity",
     "capabilities": ["Bash", "Read", "Write"]
