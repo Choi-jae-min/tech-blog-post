@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # tech-blog-post one-command installer
-#   curl -fsSL https://raw.githubusercontent.com/Choi-jae-min/-tech-blog-post/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/Choi-jae-min/tech-blog-post/main/install.sh | bash
 #
 # Detects installed host CLIs (claude / codex / gemini) and installs the
 # plugin/extension for each. Grok Build reads skills globally from
@@ -9,7 +9,7 @@
 # this skill to a specific project. Per-host failures are non-fatal.
 set -u
 
-REPO="Choi-jae-min/-tech-blog-post"
+REPO="Choi-jae-min/tech-blog-post"
 REPO_URL="https://github.com/${REPO}.git"
 INSTALLED=0
 

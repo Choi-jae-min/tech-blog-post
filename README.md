@@ -63,7 +63,7 @@ SEO 최적화해서 써줘
 Claude Code · Codex · Cursor · Gemini CLI · Grok Build를 지원합니다. 한 번에 설치하려면:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Choi-jae-min/-tech-blog-post/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Choi-jae-min/tech-blog-post/main/install.sh | bash
 ```
 
 호스트별 CLI(`claude`/`codex`/`gemini`)가 감지되면 그 CLI로 설치하고, Grok Build는
@@ -75,14 +75,14 @@ curl -fsSL https://raw.githubusercontent.com/Choi-jae-min/-tech-blog-post/main/i
 **Claude Code (git clone)**
 
 ```bash
-git clone https://github.com/Choi-jae-min/-tech-blog-post.git \
+git clone https://github.com/Choi-jae-min/tech-blog-post.git \
   ~/.claude/skills/tech-blog-post
 ```
 
 **Claude Code (플러그인 마켓플레이스, 권장)**
 
 ```
-/plugin marketplace add Choi-jae-min/-tech-blog-post
+/plugin marketplace add Choi-jae-min/tech-blog-post
 /plugin install tech-blog-post@tech-blog-post-marketplace
 ```
 
@@ -94,26 +94,26 @@ CLI·Grok Build에는 이 의존성 자동 설치가 없으므로, 그 스킬이
 **Codex**
 
 ```
-codex plugin marketplace add Choi-jae-min/-tech-blog-post
+codex plugin marketplace add Choi-jae-min/tech-blog-post
 codex plugin add tech-blog-post
 ```
 
 **Gemini CLI**
 
 ```bash
-gemini extensions install https://github.com/Choi-jae-min/-tech-blog-post
+gemini extensions install https://github.com/Choi-jae-min/tech-blog-post
 ```
 
 **Grok Build**
 
 ```bash
-git clone https://github.com/Choi-jae-min/-tech-blog-post.git ~/.grok/skills/tech-blog-post
+git clone https://github.com/Choi-jae-min/tech-blog-post.git ~/.grok/skills/tech-blog-post
 ```
 
 **Cursor** (프로젝트 단위 전용 — 전역 설치 불가)
 
 ```bash
-git clone https://github.com/Choi-jae-min/-tech-blog-post.git .cursor/skills/tech-blog-post
+git clone https://github.com/Choi-jae-min/tech-blog-post.git .cursor/skills/tech-blog-post
 ```
 
 이 스킬을 쓰려는 각 프로젝트 안에서 실행합니다. `.claude/skills/`, `.codex/skills/`,
