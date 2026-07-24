@@ -42,28 +42,36 @@ if command -v gemini >/dev/null 2>&1; then
   try_host "Gemini CLI" gemini extensions install "https://github.com/${REPO}"
 fi
 
-# Grok Build reads skills globally from ~/.grok/skills/ — clone/update there.
-SKILL_DIR="${HOME}/.grok/skills/tech-blog-post"
-if [ -d "${SKILL_DIR}/.git" ]; then
-  if git -C "${SKILL_DIR}" pull --ff-only >/dev/null 2>&1; then
-    log "✓ ~/.grok/skills/tech-blog-post 갱신 (Grok Build)"
-    INSTALLED=$((INSTALLED + 1))
-  else
-    warn "✗ ~/.grok/skills/tech-blog-post 갱신 실패 — 수동으로 git pull 하세요"
+# Grok Build (~/.grok/skills/) and Cursor (~/.cursor/skills/) both read skills
+# from a global home directory. Install there only when that host is actually
+# present — its CLI is on PATH, or its config dir already exists — so we never
+# create dot-dirs for hosts the user doesn't use.
+clone_or_update() { # <label> <dest>
+  local label="$1" dest="$2"
+  if [ -d "${dest}/.git" ]; then
+    if git -C "${dest}" pull --ff-only >/dev/null 2>&1; then
+      log "✓ ${dest} 갱신 (${label})"; INSTALLED=$((INSTALLED + 1))
+    else
+      warn "✗ ${dest} 갱신 실패 — 수동으로 git pull 하세요"
+    fi
+  elif [ ! -e "${dest}" ]; then
+    mkdir -p "$(dirname "${dest}")"
+    if git clone --quiet "${REPO_URL}" "${dest}"; then
+      log "✓ ${dest} clone (${label})"; INSTALLED=$((INSTALLED + 1))
+    else
+      warn "✗ clone 실패: ${dest}"
+    fi
   fi
-elif [ ! -e "${SKILL_DIR}" ]; then
-  mkdir -p "${HOME}/.grok/skills"
-  if git clone --quiet "${REPO_URL}" "${SKILL_DIR}"; then
-    log "✓ ~/.grok/skills/tech-blog-post clone (Grok Build)"
-    INSTALLED=$((INSTALLED + 1))
-  else
-    warn "✗ clone 실패: ${SKILL_DIR}"
-  fi
-fi
+}
 
-warn "Cursor는 프로젝트 단위로만 스킬을 읽습니다 — 전역 설치가 안 됩니다. 이 스킬을 쓸"
-warn "프로젝트에서 'git clone ${REPO_URL} .cursor/skills/tech-blog-post' 를 실행하세요"
-warn "(README 참조. .claude/skills, .codex/skills, .agents/skills 아래도 Cursor가 같이 읽습니다)."
+maybe_global_install() { # <label> <cli> <config-root> <dest>
+  if command -v "$2" >/dev/null 2>&1 || [ -d "$3" ]; then
+    clone_or_update "$1" "$4"
+  fi
+}
+
+maybe_global_install "Grok Build" grok   "${HOME}/.grok"   "${HOME}/.grok/skills/tech-blog-post"
+maybe_global_install "Cursor"     cursor "${HOME}/.cursor" "${HOME}/.cursor/skills/tech-blog-post"
 
 if [ "${INSTALLED}" -eq 0 ]; then
   warn "설치된 호스트가 없습니다. 지원 호스트: Claude Code·Codex·Gemini CLI·Grok Build·Cursor (README 참조)"
