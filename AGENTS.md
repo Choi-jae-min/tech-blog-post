@@ -31,9 +31,11 @@
 - **5단계(문장 다듬기)**: `elements-of-style`의 `writing-clearly-and-concisely` 스킬. Claude
   Code에서 이 플러그인을 설치했을 때만 쓸 수 있다. 없으면 이 단계 없이 직접 문장을 간결하게
   다듬는다.
-- **4-1단계(개념 이미지 생성, 선택)**: `runway-api`의 `rw-generate-image` 스킬 + 환경변수
-  `RUNWAYML_API_SECRET`. 플러그인 자체가 없으면 조용히 건너뛴다. 플러그인은 있는데 키만
-  없으면 이번 실행에서 한 번만 물어본다(자세한 문구는 `SKILL.md` 4-1단계 참고).
+- **4-1단계(개념 이미지 생성)**: `runway-api`의 `rw-generate-image` 스킬 + 환경변수
+  `RUNWAYML_API_SECRET`. Claude Code에서는 `runway-api`가 강제 의존성으로 설치되므로
+  이미지 생성이 기본 동작이다. `dependencies`를 지원하지 않는 호스트에서 스킬 자체가 없으면
+  조용히 건너뛴다. 플러그인은 있는데 키만 없으면 이번 실행에서 한 번만 물어보고, 사용자가
+  명시적으로 빼달라고 하면 키 여부와 무관하게 스킵한다(자세한 문구는 `SKILL.md` 4-1단계 참고).
 
 ## 출력 위치
 

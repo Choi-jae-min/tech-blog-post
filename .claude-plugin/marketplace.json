@@ -11,7 +11,7 @@
       "name": "tech-blog-post",
       "source": "./",
       "description": "작업·대화 내용을 읽을 수 있는 글로 정리하는 스킬. 블로그·포스팅 요청이면 SEO 최적화된 글로, 그냥 정리 요청이면 파일 저장 여부(HTML 기본/마크다운/저장 안 함)를 물어본 뒤 만든다",
-      "version": "1.8.0",
+      "version": "1.8.1",
       "author": {
         "name": "Choi Jae-min"
       },
