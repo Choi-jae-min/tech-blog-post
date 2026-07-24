@@ -32,8 +32,10 @@ if command -v claude >/dev/null 2>&1; then
 fi
 
 if command -v codex >/dev/null 2>&1; then
+  # Codex reads the marketplace manifest from .agents/plugins/ (--sparse), then
+  # installs by stable plugin@marketplace id.
   try_host "Codex" bash -c \
-    "codex plugin marketplace add ${REPO} && codex plugin add tech-blog-post"
+    "codex plugin marketplace add ${REPO} --sparse .agents/plugins && codex plugin add tech-blog-post@tech-blog-post-marketplace"
 fi
 
 if command -v gemini >/dev/null 2>&1; then

@@ -1,0 +1,22 @@
+{
+  "name": "tech-blog-post-marketplace",
+  "interface": {
+    "displayName": "tech-blog-post"
+  },
+  "plugins": [
+    {
+      "name": "tech-blog-post",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Choi-jae-min/tech-blog-post.git",
+        "path": "./plugins/tech-blog-post",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

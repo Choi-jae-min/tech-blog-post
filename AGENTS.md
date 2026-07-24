@@ -17,7 +17,8 @@
 먼저 발견되는 것을 권위적 문서로 쓴다 — 내용은 전부 같다(심볼릭 링크).
 
 - 저장소 루트 `SKILL.md` (git clone으로 직접 설치했을 때)
-- `.codex/skills/tech-blog-post/SKILL.md` (Codex)
+- `.codex/skills/tech-blog-post/SKILL.md` (Codex 프로젝트 로컬)
+- `plugins/tech-blog-post/skills/tech-blog-post/SKILL.md` (Codex 마켓플레이스 설치)
 - `.cursor/skills/tech-blog-post/SKILL.md` (Cursor)
 - `.grok/skills/tech-blog-post/SKILL.md` (Grok Build)
 - `.claude/skills/tech-blog-post/SKILL.md` (Claude Code 프로젝트 로컬 설치, Cursor도 겸용으로 읽음)

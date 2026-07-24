@@ -94,9 +94,13 @@ CLI·Grok Build에는 이 의존성 자동 설치가 없으므로, 그 스킬이
 **Codex**
 
 ```
-codex plugin marketplace add Choi-jae-min/tech-blog-post
-codex plugin add tech-blog-post
+codex plugin marketplace add Choi-jae-min/tech-blog-post --sparse .agents/plugins
+codex plugin add tech-blog-post@tech-blog-post-marketplace
 ```
+
+Codex는 Claude Code와 규격이 달라서, 마켓플레이스 매니페스트를 `.agents/plugins/marketplace.json`에서
+읽고 플러그인은 `plugins/tech-blog-post/` 아래(`.codex-plugin/plugin.json` + `skills/`)에서 찾습니다.
+저장소에 그 구조를 따로 두었습니다.
 
 **Gemini CLI**
 
@@ -134,9 +138,14 @@ git clone https://github.com/Choi-jae-min/tech-blog-post.git .cursor/skills/tech
 |---|---|
 | `SKILL.md` | 실제 파일 (권위 원본) |
 | `.claude/skills/tech-blog-post/SKILL.md` | → `SKILL.md` (Cursor가 이 경로도 같이 읽음) |
-| `.codex/skills/tech-blog-post/SKILL.md` | → `SKILL.md` |
+| `.codex/skills/tech-blog-post/SKILL.md` | → `SKILL.md` (Codex 프로젝트 로컬 스킬 경로) |
 | `.cursor/skills/tech-blog-post/SKILL.md` | → `SKILL.md` |
 | `.grok/skills/tech-blog-post/SKILL.md` | → `SKILL.md` |
+| `plugins/tech-blog-post/skills/tech-blog-post/SKILL.md` | → `SKILL.md` (Codex 마켓플레이스 설치 경로) |
+
+Codex 마켓플레이스로 설치할 때는 `.agents/plugins/marketplace.json`이 `plugins/tech-blog-post/`를
+플러그인 루트로 가리키고, 그 안의 `.codex-plugin/plugin.json`이 `skills` 필드로 위 심볼릭 링크를
+스킬로 노출합니다.
 
 `AGENTS.md`는 Codex·Cursor·Gemini CLI·Grok Build가 세션 시작 시 읽는 공유 컨텍스트
 파일로, 위 경로 안내와 호스트별로 없을 수 있는 의존 스킬(`elements-of-style`,
